@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Users</title>
+    <script>
+        function fetchOnlineUsers() {
+            fetch('/online-users/')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('online-users-list').innerHTML = data;
+                });
+        }
+
+        setInterval(fetchOnlineUsers, 10000); // Refresh every 10 seconds
+    </script>
+</head>
+<body>
+    <h1>Online Users</h1>
+    <ul id="online-users-list">
+        {% for user in online_users %}
+            <li>{{ user.username }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+ 
+
+
+{% comment %} the above js code is used to send a call to the live server again and again in every 10 seconds and all the live servers will be shown by their names  {% endcomment %}
+{% comment %} it can be customisable to sea users by their user id or email if the issue of multiple same names persists.  {% endcomment %}
